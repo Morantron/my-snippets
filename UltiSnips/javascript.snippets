@@ -1,0 +1,96 @@
+###########################################################################
+#                            JS Snippets \m/                              #
+###########################################################################
+
+snippet fun "function (fun)"
+function (${0}) {
+	${1}
+};
+endsnippet
+
+snippet ife "if ___ else"
+if (${1}) {
+	$2
+} else {
+	$3
+}
+endsnippet
+
+snippet if "if"
+if (${1}) {
+	$0
+}
+endsnippet
+
+snippet log "console.log(thing)"
+console.log(${1});
+endsnippet
+
+snippet llog "console.log('thing', thing)"
+console.log('$1', ${1});
+endsnippet
+
+snippet deb "debugger;"
+debugger;
+endsnippet
+
+snippet method "method"
+`!p
+import inflection
+snip.rv = inflection.camelize(snip.fn.replace('-','_')).split('.')[0]
+`.${1:method} = function (${2}) {
+	$3
+};
+endsnippet
+
+snippet it "it"
+it("${1}", function () {
+	$2
+});
+endsnippet
+
+snippet its "it should"
+it("should ${1}", function () {
+	$2
+});
+endsnippet
+
+snippet desc "describe"
+describe("${1}", function () {
+	$2
+});
+endsnippet
+
+snippet bef "before"
+before("${1}", function () {
+	$2
+});
+endsnippet
+
+snippet befeach "before each"
+beforeEach("${1}", function () {
+	$2
+});
+endsnippet
+
+snippet aft "after"
+after("${1}", function () {
+	$2
+});
+endsnippet
+
+snippet afteach "after each"
+afterEach("${1}", function () {
+	$2
+});
+endsnippet
+
+# TODO before after beforeach after
+
+# TODO: add underscore snippets
+snippet _map "_map"
+_.map(${1:obj}, function (${2:elem})) {
+	$3
+});
+endsnippet
+# vim:ft=snippets:
