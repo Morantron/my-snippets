@@ -2,10 +2,22 @@
 #                            JS Snippets \m/                              #
 ###########################################################################
 
-snippet fun "function (fun)"
+snippet fun "function (fun)" i
 function (${0}) {
 	${1}
-};
+}
+endsnippet
+
+snippet fun) "function (fun)" i
+function (${0}) {
+	${1}
+});
+endsnippet
+
+snippet funn "function (fun)" i
+function $0 (${1}) {
+	${2}
+}
 endsnippet
 
 snippet ife "if ___ else"
@@ -26,8 +38,20 @@ snippet log "console.log(thing)"
 console.log(${1});
 endsnippet
 
+snippet log' "console.log('thing')"
+console.log('${1}');
+endsnippet
+
 snippet llog "console.log('thing', thing)"
-console.log('$1', ${1});
+console.log(`!p
+import re
+if re.search("'", t[1]):
+	quotes = '"'
+else:
+	quotes = "'"
+
+snip.rv = quotes + t[1] + quotes
+`, ${1});
 endsnippet
 
 snippet deb "debugger;"
@@ -35,53 +59,105 @@ debugger;
 endsnippet
 
 snippet method "method"
+/**
+ * `!p
+from inflection import underscore, humanize, pluralize
+doc = humanize(underscore(t[1])).split(' ')
+doc = [pluralize(doc[0])] + doc[1:]
+doc = ' '.join(doc)
+snip.rv = doc
+`
+ *`!p
+import re
+params = t[2]
+
+def get_known_type(param_name):
+    known_names = {}
+    known_patterns = {}
+
+    known_names['options'] = 'Object'
+    known_names['data'] = 'Object'
+    known_names['event'] = 'Event'
+    known_names['callback'] = 'Function'
+    known_names['value'] = 'String'
+
+    known_patterns['_id$'] = 'Integer'
+    known_patterns['_ids$'] = 'Array<Integer>'
+
+    known_entities = ['task', 'project', 'user', 'conversation', 'model', 'collection']
+
+    param_type = 'LOL'
+
+    if known_names.get(param_name):
+        param_type = known_names.get(param_name)
+
+    for pattern in known_patterns.keys():
+        if re.search(pattern, param_name):
+            param_type =  known_patterns[pattern]
+            break
+
+    if known_entities.__contains__(param_name):
+        param_type = param_name.capitalize()
+
+    return param_type
+
+if params != '':
+	params = re.split(', ', params)
+else:
+	params = []
+
+for param in params:
+	snip += ' * @param {' + get_known_type(param) +'} ' + param
+`
+ */
 `!p
-import inflection
-snip.rv = inflection.camelize(snip.fn.replace('-','_')).split('.')[0]
+from inflection import camelize
+module_name = camelize(snip.fn.replace('-','_')).split('.')[0]
+snip.rv = module_name
 `.${1:method} = function (${2}) {
 	$3
 };
 endsnippet
 
 snippet it "it"
-it("${1}", function () {
+it('${1}', function () {
 	$2
 });
 endsnippet
 
 snippet its "it should"
-it("should ${1}", function () {
+it('should ${1}', function () {
 	$2
 });
 endsnippet
 
 snippet desc "describe"
-describe("${1}", function () {
+describe('${1}', function () {
 	$2
 });
 endsnippet
 
 snippet bef "before"
-before("${1}", function () {
-	$2
+before(function () {
+	$1
 });
 endsnippet
 
 snippet befeach "before each"
-beforeEach("${1}", function () {
-	$2
+beforeEach(function () {
+	$1
 });
 endsnippet
 
 snippet aft "after"
-after("${1}", function () {
-	$2
+after(function () {
+	$1
 });
 endsnippet
 
 snippet afteach "after each"
-afterEach("${1}", function () {
-	$2
+afterEach( function () {
+	$1
 });
 endsnippet
 
@@ -89,7 +165,19 @@ endsnippet
 
 # TODO: add underscore snippets
 snippet _map "_map"
-_.map(${1:obj}, function (${2:elem})) {
+_.map(${1:obj}, function (${2:elem}) {
+	$3
+});
+endsnippet
+
+snippet _each "_each"
+_.each(${1:obj}, function (${2:elem}) {
+	$3
+});
+endsnippet
+
+snippet _each "_filter"
+_.filter(${1:obj}, function (${2:elem}) {
 	$3
 });
 endsnippet
