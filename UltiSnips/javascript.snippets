@@ -114,49 +114,55 @@ for param in params:
 from inflection import camelize
 module_name = camelize(snip.fn.replace('-','_')).split('.')[0]
 snip.rv = module_name
-`.${1:method} = function (${2}) {
+`.${1:method} = function(${2}) {
 	$3
 };
 endsnippet
 
 snippet it "it"
-it('${1}', function () {
+it('${1}', () => {
 	$2
 });
 endsnippet
 
 snippet its "it should"
-it('should ${1}', function () {
+it('should ${1}', () => {
 	$2
 });
 endsnippet
 
 snippet desc "describe"
-describe('${1}', function () {
+describe('${1}', () => {
+	$2
+});
+endsnippet
+
+snippet cont "context"
+context('${1}', () => {
 	$2
 });
 endsnippet
 
 snippet bef "before"
-before(function () {
+before(() => {
 	$1
 });
 endsnippet
 
 snippet befeach "before each"
-beforeEach(function () {
+beforeEach(() => {
 	$1
 });
 endsnippet
 
 snippet aft "after"
-after(function () {
+after(() => {
 	$1
 });
 endsnippet
 
 snippet afteach "after each"
-afterEach( function () {
+afterEach(() => {
 	$1
 });
 endsnippet
@@ -165,19 +171,19 @@ endsnippet
 
 # TODO: add underscore snippets
 snippet _map "_map"
-_.map(${1:obj}, function (${2:elem}) {
+_.map(${1:obj}, (${2:elem}) => {
 	$3
 });
 endsnippet
 
 snippet _each "_each"
-_.each(${1:obj}, function (${2:elem}) {
+_.each(${1:obj}, (${2:elem}) => {
 	$3
 });
 endsnippet
 
 snippet _each "_filter"
-_.filter(${1:obj}, function (${2:elem}) {
+_.filter(${1:obj}, (${2:elem}) => {
 	$3
 });
 endsnippet
